@@ -1,28 +1,57 @@
 import React, { useState } from "react";
 
+
 export default function MindRefresh() {
   const [chatOpen, setChatOpen] = useState(false);
   const [messages, setMessages] = useState([
     { sender: "bot", text: "Hi! I’m here to help you relax. How are you feeling today?" }
   ]);
   const [input, setInput] = useState("");
-  const [emotionInput, setEmotionInput] = useState(""); // New state for emotion
+  const [emotionInput, setEmotionInput] = useState("");
+  const [lastEmotion, setLastEmotion] = useState(null); // Remember last predicted emotion
 
   // Toggle chatbot
   const handleToggleChat = () => setChatOpen(!chatOpen);
+
+  // Emotion-based supportive responses
+  const emotionResponses = {
+    happy: "That's awesome! Keep focusing on what motivates you 🎉",
+    sad: "I’m sorry you feel this way. Try writing down 3 good things today 💙",
+    angry: "Take a slow breath. Sometimes a short walk helps calm your mind 🌿",
+    stressed: "Pause for a minute, stretch, and drink some water. You’re doing well 🌸",
+    fear: "It’s okay to feel afraid. Break the problem into small steps 🪴",
+    neutral: "Stay steady. Use this calm moment to plan your next step ✨"
+  };
+
+  // Rule-based human-like responses for general chat
+  const humanResponses = [
+    "I understand, tell me more about it.",
+    "That sounds interesting! How does that make you feel?",
+    "Hmm, I get you. Want to try a small relaxation exercise?",
+    "Thanks for sharing! Remember to take a deep breath 😊",
+    "I see. Let's think of something positive together!"
+  ];
 
   // Send message in chatbot
   const handleSend = () => {
     if (!input.trim()) return;
 
-    setMessages([...messages, { sender: "user", text: input }]);
+    setMessages(prev => [...prev, { sender: "user", text: input }]);
 
-    // Placeholder bot response
+    // Friendly human-like bot response
     setTimeout(() => {
-      setMessages(prev => [
-        ...prev,
-        { sender: "bot", text: "That’s interesting! Take a deep breath and focus on it." }
-      ]);
+      let response = "";
+
+      if (lastEmotion) {
+        // If emotion known, combine with friendly advice
+        response = `Since you're feeling ${lastEmotion}, ${emotionResponses[lastEmotion]}`;
+      } else {
+        // Random human-like response
+        const idx = Math.floor(Math.random() * humanResponses.length);
+        response = humanResponses[idx];
+      }
+
+      setMessages(prev => [...prev, { sender: "bot", text: response }]);
     }, 500);
 
     setInput("");
@@ -37,21 +66,26 @@ export default function MindRefresh() {
     if (!emotionInput.trim()) return;
 
     try {
-      const response = await fetch("http://localhost:8000/predict_emotion", { // Your backend endpoint
+      const response = await fetch("http://localhost:8000/predict_emotion", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: emotionInput })
       });
 
       const data = await response.json();
+      const emotion = data.emotion || data.predicted_emotion;
 
+      setLastEmotion(emotion); // Remember last emotion
+
+      // Add prediction message
       setMessages(prev => [
         ...prev,
-        { sender: "bot", text: `Emotion Prediction: ${data.prediction}` }
+        { sender: "bot", text: `Emotion Prediction: ${emotion}` },
+        { sender: "bot", text: emotionResponses[emotion] || "I’m here for you 💜" }
       ]);
 
       setEmotionInput("");
-      setChatOpen(true);
+      setChatOpen(true); // open chat when prediction arrives
     } catch (error) {
       console.error("Prediction error:", error);
     }
@@ -102,10 +136,17 @@ export default function MindRefresh() {
         </button>
       </div>
 
+      {/* Show last prediction result */}
+      {lastEmotion && (
+        <h3 className="text-xl text-gray-800 mt-4">
+          Last Predicted Emotion: <span className="font-semibold">{lastEmotion}</span>
+        </h3>
+      )}
+
       {/* Chat Toggle Button */}
       <button
         onClick={handleToggleChat}
-        className="mb-4 px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors shadow-md z-40 relative"
+        className="mt-6 px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors shadow-md z-40 relative"
       >
         {chatOpen ? "Close Chat" : "Open Chat"}
       </button>
@@ -113,7 +154,6 @@ export default function MindRefresh() {
       {/* Floating Chatbox */}
       {chatOpen && (
         <div className="fixed bottom-6 right-6 w-[300px] md:w-[400px] bg-white/95 backdrop-blur-md rounded-xl shadow-lg p-4 flex flex-col gap-4 z-50">
-          
           <div className="h-60 overflow-y-auto flex flex-col gap-2 mb-2">
             {messages.map((msg, index) => (
               <div
@@ -145,7 +185,8 @@ export default function MindRefresh() {
           </div>
         </div>
       )}
-
     </section>
   );
 }
+
+
