@@ -1,0 +1,11 @@
+to run download libraries
+opencv-python
+deepface
+tf_keras
+
+
+to run 
+
+go in emotion folder
+
+python app.py
