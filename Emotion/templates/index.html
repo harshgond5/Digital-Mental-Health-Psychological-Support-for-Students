@@ -1,0 +1,21 @@
+<body>
+    <h1>Live Emotion Detection</h1>
+
+    <!-- Video feed -->
+    <img src="{{ url_for('video') }}" width="640" height="480">
+
+    <!-- Current emotion -->
+    <div class="emotion-box">
+        Current Emotion: <span id="emotion-text">{{ emotion }}</span>
+    </div>
+
+    <!-- Stress-buster suggestion -->
+    <div class="suggestion" id="suggestion-text">Waiting for suggestion...</div>
+
+    <!-- Buttons -->
+    <div style="margin-top: 20px;">
+        <a href="{{ url_for('start') }}"><button>Start Camera</button></a>
+        <a href="{{ url_for('recapture') }}"><button>Recapture Emotion</button></a>
+        <a href="{{ url_for('history') }}"><button>View History</button></a>
+    </div>
+</body>

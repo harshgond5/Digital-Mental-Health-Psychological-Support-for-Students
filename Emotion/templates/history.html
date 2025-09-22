@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emotion History</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f0f0f0; text-align: center; }
+        h1 { margin-top: 20px; }
+        table { margin: 20px auto; border-collapse: collapse; width: 60%; background: #fff; }
+        th, td { padding: 10px; border: 1px solid #ccc; font-size: 18px; }
+        th { background: #007BFF; color: #fff; }
+        tr:nth-child(even) { background: #f2f2f2; }
+        a button { margin: 20px; padding: 10px 20px; font-size: 16px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Emotion History (Last 10 Records)</h1>
+
+    <table>
+        <tr>
+            <th>Timestamp</th>
+            <th>Emotion</th>
+        </tr>
+        {% if history %}
+            {% for row in history %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="2">No records found.</td>
+            </tr>
+        {% endif %}
+    </table>
+
+    <a href="{{ url_for('index') }}"><button>Back to Home</button></a>
+</body>
+</html>
