@@ -30,7 +30,7 @@ export default function LoginPage() {
 
         alert("Account created successfully 🎉");
       }
-      navigate("/home"); // redirect after login/signup
+      navigate("/form"); // redirect after login/signup
     } catch (error) {
       alert(error.message);
     }

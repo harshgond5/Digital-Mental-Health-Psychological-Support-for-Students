@@ -4,6 +4,7 @@ import { auth } from "./firebase"; // adjust path if needed
 
 export default function CalmNavbar() {
   const [user, setUser] = useState(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,7 +35,7 @@ export default function CalmNavbar() {
 
       {/* Logo */}
       <div className="text-2xl md:text-3xl font-bold tracking-wide">
-        <Link to="/">MindEase</Link>
+        <Link to="/">SukkonBuddy</Link>
       </div>
 
       {/* Navigation Links */}
@@ -43,11 +44,28 @@ export default function CalmNavbar() {
           <Link to="/">Home</Link>
         </li>
         <li className="hover:text-gray-300 transition-colors">
-          <Link to="/about">About</Link>
+          <Link to="/booking">Counselor</Link>
         </li>
-        <li className="hover:text-gray-300 transition-colors">
-          <Link to="/home">Dashbord</Link>
+
+        {/* Dashboard with Dropdown */}
+        <li
+          className="relative cursor-pointer"
+          onMouseEnter={() => setDropdownOpen(true)}
+          onMouseLeave={() => setDropdownOpen(false)}
+        >
+          <span className="hover:text-gray-300 transition-colors">Dashboard ▾</span>
+          {dropdownOpen && (
+            <ul className="absolute top-8 left-0 w-44 bg-white text-gray-800 rounded-md shadow-lg z-50">
+              <li className="px-4 py-2 hover:bg-gray-100">
+                <Link to="/home">User </Link>
+              </li>
+              <li className="px-4 py-2 hover:bg-gray-100">
+                <Link to="/adminlogin">Admin </Link>
+              </li>
+            </ul>
+          )}
         </li>
+
         <li className="hover:text-gray-300 transition-colors">
           <Link to="/contact">Contact</Link>
         </li>
@@ -81,7 +99,7 @@ export default function CalmNavbar() {
           </>
         ) : (
           <li className="hover:text-gray-300 transition-colors">
-            <Link to="/login">Login</Link>
+            <Link to="/welcome">Login</Link>
           </li>
         )}
       </ul>

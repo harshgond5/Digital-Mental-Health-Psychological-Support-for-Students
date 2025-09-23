@@ -14,6 +14,12 @@ import StressAssessmentPage from "./component/pages/form";
 import StressReliefAudios from "./component/pages/audio";
 import MemorySharingPage from "./component/pages/memory";
 import CBTSection from "./component/pages/cbt";
+import WelcomePage from "./component/pages/welcomepage";
+import BookingPage from "./component/pages/booking";
+import AdminAvailabilityForm from "./component/pages/admin";
+import AdminLoginWithSignup from "./component/pages/adminlogin";
+import AdminAvailability from "./component/pages/adminavaibility";
+
 // Use the correct relative path
 
 
@@ -31,9 +37,15 @@ function App() {
          <Route path='/login' element={<LoginPage />} /> 
          <Route path="/home" element={<HomePage />} />
          <Route path="/start" element={<StressAssessmentPage />} />
+         <Route path="/form" element={<StressAssessmentPage />} />
          <Route path="/audio" element={<StressReliefAudios />} />
          <Route path="/memory" element={<MemorySharingPage />} />
           <Route path="/cbt" element={<CBTSection/>} />
+          <Route path="/welcome" element={<WelcomePage/>} />
+          <Route path="/booking" element={<BookingPage/>} />
+          <Route path="/adminlogin" element={<AdminLoginWithSignup/>} />
+           
+           <Route path="/admin" element={<AdminAvailability />} />
 
         {/* Add more routes here if needed */}
       </Routes>
