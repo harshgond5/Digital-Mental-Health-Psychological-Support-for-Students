@@ -5,22 +5,22 @@ const About = () => {
     {
       title: "Our Team",
       text: "We are a group of passionate developers and thinkers who believe in building solutions that truly matter. Each member brings unique skills and creativity to deliver the best for our users.",
-      img: "https://source.unsplash.com/600x400/?team,people",
+      img: "/images/our team.png",
     },
     {
       title: "Our Goals",
       text: "Our goal is simple: to make technology more human-centered. We aim to bridge the gap between complex systems and user-friendly solutions that inspire trust and ease of use.",
-      img: "https://source.unsplash.com/600x400/?goals,mountain",
+      img: "/images/our goal.png",
     },
     {
       title: "Our Mission & Focus",
       text: "We are dedicated to raising awareness about stress, mental wellness, and productivity. Many people ignore these challenges, but we take them seriously—and we’re here to help users find calm in their daily lives.",
-      img: "https://source.unsplash.com/600x400/?focus,calm",
+      img: "/images/our goal.png",
     },
     {
       title: "Our Vision",
       text: "We imagine a future where technology doesn’t just solve problems but also supports well-being. Through innovation, empathy, and design, we want to create experiences that leave a positive mark on every user.",
-      img: "https://source.unsplash.com/600x400/?innovation,vision",
+      img: "/images/our vision.png",
     },
   ];
 

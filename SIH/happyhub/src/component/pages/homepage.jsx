@@ -24,7 +24,7 @@ export default function Dashboard() {
         <div className="bg-white shadow-2xl rounded-3xl p-10 max-w-md w-full text-center transform transition hover:scale-105">
           <h2 className="text-4xl font-bold text-purple-700">Welcome to MindEase</h2>
           <p className="text-gray-600 mt-3">
-            Login to access your personalized mental wellness dashboard
+            Login to access your personalized SukoonBuddy dashboard
           </p>
           <Link to="/login">
             <button className="mt-6 bg-gradient-to-r from-purple-500 to-blue-500 text-white px-8 py-3 rounded-2xl shadow-lg hover:from-blue-500 hover:to-purple-500 transition-all w-full font-semibold">

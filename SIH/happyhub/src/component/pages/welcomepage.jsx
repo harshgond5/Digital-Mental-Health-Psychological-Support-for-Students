@@ -5,7 +5,7 @@ export default function WelcomePage() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-tr from-blue-200 via-purple-200 to-pink-200 relative">
       <div className="bg-white shadow-2xl rounded-3xl p-10 max-w-md w-full text-center transform transition hover:scale-105">
-        <h2 className="text-4xl font-bold text-purple-700">Welcome to MindEase</h2>
+        <h2 className="text-4xl font-bold text-purple-700">Welcome to SukoonBuddy</h2>
         <p className="text-gray-600 mt-3">
           Login to access your personalized mental wellness dashboard
         </p>

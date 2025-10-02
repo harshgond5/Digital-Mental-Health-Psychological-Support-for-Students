@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { Link, useNavigate } from "react-router-dom";
 
 export default function MindRefresh() {
   const [chatOpen, setChatOpen] = useState(false);
@@ -92,8 +92,13 @@ export default function MindRefresh() {
   };
 
   return (
-    <section className="w-screen min-h-[80vh] mt-20 flex flex-col justify-start items-center
-      bg-gradient-to-b from-[#D0EAE7] to-[#B6D6C8] text-center px-6 md:px-12 relative">
+    <section
+  className="w-screen min-h-[80vh] mt-20 flex flex-col justify-start items-center 
+    bg-[url('/images/bg.png')] bg-cover bg-center bg-no-repeat
+    bg-gradient-to-b from-[#D0EAE7]/90 to-[#B6D6C8]/90
+    text-center px-6 md:px-12 relative"
+>
+
 
       {/* Main Title */}
       <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mt-8 mb-6">
@@ -121,19 +126,21 @@ export default function MindRefresh() {
 
       {/* Emotion Prediction Input */}
       <div className="flex flex-col md:flex-row gap-4 mb-4">
-        <input
+        {/* <input
           type="text"
           value={emotionInput}
           onChange={(e) => setEmotionInput(e.target.value)}
           placeholder="Type how you feel..."
           className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300"
-        />
+        /> */}
+        <Link to="/start">
         <button
           onClick={handlePredictEmotion}
-          className="px-6 py-2 bg-purple-500 text-white rounded-full hover:bg-purple-600 transition-colors"
+          className="px-16 py-4 bg-purple-500 text-white rounded-full hover:bg-purple-700 transition-colors"
         >
-          Predict Emotion
+          Let's Predict Emotion
         </button>
+        </Link>
       </div>
 
       {/* Show last prediction result */}
@@ -146,7 +153,7 @@ export default function MindRefresh() {
       {/* Chat Toggle Button */}
       <button
         onClick={handleToggleChat}
-        className="mt-6 px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors shadow-md z-40 relative"
+        className="mt-6 px-3 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors shadow-md z-40 relative"
       >
         {chatOpen ? "Close Chat" : "Open Chat"}
       </button>
